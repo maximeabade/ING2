@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Géométrie, Caméras et 3D reconstruction</title>
+    <meta charset="utf-8">
+    <style>
+     .left-column {
+       width: 50%;
+       float: left;
+     }
+     .right-column {
+       width: 50%;
+       float: right;
+     }
+     .grey { color: #bbbbbb; }
+      </style>
+    <link rel="stylesheet" type="text/css" href="slides.css">
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle
+
+# Géométrie, caméras et reconstruction 3D
+
+Crée par Paul Gay, modifié par Yannick Le Nir
+
+---
+
+# Pour aujourd'hui...
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/processings.png" style="width: 400px;" />
+        <br/><br/>]
+La géométrie en vision par ordinateur: 
+
+- Profondeur, volume, point de vue, orientation, mouvement...
+
+---
+
+# Pourquoi nous voudrions apprendre la géométrie
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/application.png" style="width: 600px;" />
+        <br/><br/>]
+
+Avec la nouvelle génération de smartphones!
+
+---
+# Même à l'heure du Deep learning
+
+La mode du Deep Learning a diminué son intérêt mais:
+
+- La géométrie fournit une théorie solide pour décrire la forme et la structure du monde.
+
+- A priori intéressant pour l'apprentissage.
+
+- La géométrie est incluse dans nos données contrairement à des labels sémantiques.<br>
+$\Rightarrow$ Utile pour l'apprentissage non-supervisé.
+
+<a href="https://alexgkendall.com/computer_vision/have_we_forgotten_about_geometry_in_computer_vision/">Have we forgotten about geometry in computer vision?</a>
+<br>
+Article du blog d'Alex Kendall
+---
+
+# Transformation basiques 
+.center[<img src="https://paulgay.github.io/images/cours_ti2/transformations.png" style="width: 600px;" />
+        <br/><br/>]
+
+Modifier une image avec une transformation sur les pixels
+$$\begin{pmatrix}x' \\\ y' \end{pmatrix} = A \begin{pmatrix}x & y  \end{pmatrix}^T + B,$$
+où  $A\in \Re^{2,2}$ et $B\in\Re^{2,1}$
+
+
+# Transformations basiques
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/all_2D_transformation.png" style="width: 600px;" />
+        <br/><br/>]
+
+	
+---
+
+
+# Illustrations avec des images
+
+Quelles propriétés sont perdues par ces transformations?
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/proprietes.png" style="width: 500px;" />
+        <br/><br/>]
+
+
+---
+
+# Généralisation vers la 3D
+
+Par exemple avec la rotation:
+<span style="font-size:0.7em;">
+$$
+\begin{split}
+R &= R_x(\theta)R_z(\theta)R_y(\theta) \\\
+&=\begin{pmatrix}
+1 & 0 & 0 \\\
+0 & cos\theta & -sin\theta \\\
+0 & sin\theta & cos\theta \\\
+\end{pmatrix}
+\begin{pmatrix}
+cos\theta & 0 & sin\theta \\\
+0 & 1 & 0 \\\
+-sin\theta & 0 & cos\theta \\\
+\end{pmatrix}
+\begin{pmatrix}
+cos\theta & -sin\theta& 0 \\\
+sin\theta &  cos\theta& 0 \\\
+0         & 0        & 1 \\\
+\end{pmatrix}\\\
+\end{split}
+$$
+</span>
+
+
+- $R$ est une matrice de rotation 3x3 produit de 3 autres matrices correspondant à des rotations sur chaque axe.
+
+			
+---
+# Estimer une transformation
+
+Comment retrouver les paramètres $A$ et $B$ de la transformation affine étant données les images suivantes? 
+
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/affine.png" style="width: 350px;" />
+        <br/><br/>]
+
+$$\begin{pmatrix}x' \\\ y' \end{pmatrix} = A \begin{pmatrix}x & y  \end{pmatrix}^T + B,$$
+
+avec $ A=\begin{pmatrix}
+a_1 & a_2 \\\ 
+a_3 & a_4 \\\
+\end{pmatrix}$
+et $B = \begin{pmatrix}b_1 \\\ b_2 \end{pmatrix} $
+
+
+---
+
+# Étape 1: Correspondances
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/orb.png" style="width: 400px;" />
+        <br/><br/>]
+
+Extraire une collection de couples de points $(x_i',y_i'), (x_i,y_i)$ avec pour chacun d'eux:
+
+$$\begin{pmatrix}x_i' \\\ y_i' \end{pmatrix} = A \begin{pmatrix}x_i \\\ y_i  \end{pmatrix} + B,$$
+
+
+---
+
+# Étape 2: Construction d'un système d'équations
+Notre problème peut s'écrire sous la forme $Uv = p$:
+$$
+\begin{pmatrix}
+x_1 & y_1 & 1 & 0 & 0 & 0 \\\
+ 0 & 0 & 0 & x_1 & y_1 & 1 \\\
+x_2 & y_2 & 1 & 0 & 0 & 0 \\\
+ 0 & 0 & 0 & x_2 & y_2 & 1 \\\
+   &   & \dots & &     &
+ \end{pmatrix}
+\begin{pmatrix}
+a_1 \\\
+a_2 \\\
+b_1 \\\
+a_3 \\\
+a_4 \\\
+b_2 \\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+x_1' \\\
+y_1' \\\
+x_2' \\\
+y_2' \\\
+\vdots \\\
+\end{pmatrix}
+$$
+
+C'est un système d'équations linéaires que l'on peut résoudre 
+
+---
+
+# Étape 3: résoudre le système 
+
+- Avec la pseudo-inverse:
+<span style="font-size:0.7em;">
+$$
+\begin{split}
+Uv & = b \\\
+(U^TU)^{-1}U^TU v &= (U^TU)^{-1}U^T  p \\\
+v &= (U^TU)^{-1}U^T  p \\\
+\end{split}
+$$
+</span>
+- Ou en python:
+```
+v = np.linalg.lstsq(U, p)[0]
+```
+
+La solution $\hat{v} = (U^TU)^{-1}U^T  p $ est optimale au sens des moindres carrés:
+
+<span style="font-size:0.7em;">
+$$\hat{v} = argmin\_{A, B} \sum_i || A\begin{pmatrix} x_i \\\ y_i\end{pmatrix} + B - \begin{pmatrix} x_i' \\\ y_i'\end{pmatrix} ||^2$$
+</span>
+---
+
+# Algèbre linéaire
+
+Combien de correspondances faut-il pour chaque transformation?
+
+La théorie dit qu'il faut au moins une équation par inconnue (ou degré de liberté)
+
+--
+
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/dof.png" style="width: 600px;" />
+        <br/><br/>]
+
+---
+# Quelques considérations: 
+
+En théorie, Il suffit d'une équation par inconnnue.
+
+- Dans la vraie vie, il en faut plus à cause des mesures bruitées 
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/mismatch.png" style="width: 400px;" />
+        <br/><br/>]
+
+- Nombreux travaux sur la détections de points de correspondances potentiels: Sift, ORB, LBP...
+- Surtout basés sur des histogrammes de gradients calculés autour de points d'intérêts.
+
+---
+
+# Estimation Robuste
+
+La fonction des moindres carrées, et donc la solution de la pseudo-inverse est très sensible aux valeurs abberantes!!
+.center[<img src="https://paulgay.github.io/images/cours_ti2/least_square_problem.png" style="width: 400px;" />]
+<br/><br/>
+- Séléction de points, détection de valeurs aberrantes: RANSAC
+- Fonction de coût robuste.
+
+
+---
+
+# Transformation projective
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/projective_trans.png" style="width: 400px;" />
+        <br/><br/>]
+
+
+- Par rapport au cas affine, on perd la conservation du parallélisme
+- Mais une droite reste une droite, un plan aussi
+
+$$   
+\rho\begin{pmatrix}
+x' \\\
+y' \\\
+1 \\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+a & b & c \\\                
+d & e & f \\\
+g & h & i \\\
+\end{pmatrix}
+\begin{pmatrix}
+x \\\
+y \\\
+1 \\\
+\end{pmatrix}
+$$
+- Existence d'un facteur $\rho$, pas de système direct $Uv =b$
+
+---
+
+# Coordonnées homogènes
+
+En géométrie projective, les éléments ont une ambiguité sur l'echelle: 
+
+Les points suivants correspondent tous au pixel $(x, y)$
+$$
+\begin{pmatrix}
+k_1 x \\\
+k_1 y \\\
+k_1
+\end{pmatrix}
+=
+\begin{pmatrix}
+k_2 x \\\
+k_2 y \\\
+k_2
+\end{pmatrix}
+=
+\begin{pmatrix}
+x \\\
+y \\\
+1
+\end{pmatrix}
+$$
+
+---
+
+# Les longueurs (et l'aire) ne sont pas conservées 
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/length_lost.png" style="width: 600px;" />
+        <br/><br/>]
+
+Source James Hays
+or this one: david_forsyth_length_lost
+---
+# On perd la valeur des angles
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/angle_lost.png" style="width: 600px;" />
+        <br/><br/>]
+
+---
+
+
+background-image: url(https://paulgay.github.io/images/cours_ti2/illusion.png)
+
+---
+
+background-image: url(https://paulgay.github.io/images/cours_ti2/illusion_solution.png)
+
+---
+
+
+class: middle, center
+
+## Lab : Transformations géométriques
+
+#### Ouvrir le fichier: <font color="blue">TP_transformation_affine.ipynb_</font>
+
+    </textarea>
+    <style TYPE="text/css">
+      code.has-jax {font: inherit; font-size: 100%; background: inherit; border: inherit;}
+    </style>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+      tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] // removed 'code' entry
+      }
+      });
+      MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i = 0; i < all.length; i += 1) {
+		     all[i].SourceElement().parentNode.className += ' has-jax';
+		     }
+		     });
+		     </script>
+         <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+         <!-- <script type="text/javascript" src="/home/yann/Programs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+        highlightStyle: 'github',
+        highlightSpans: true,
+        highlightLines: true
+      });
+    </script>
+  </body>
+</html>
+
+

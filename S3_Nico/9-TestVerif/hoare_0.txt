@@ -1,0 +1,43 @@
+f(val){
+cpt = val
+res = 0
+while (cpt > 0){
+    res = res+val
+    cpt = cpt - 1
+}
+return res
+}
+
+Précondition : val >= 0
+Postcondition : res = val²
+
+     P          S1       |           S2                           Q
+{val >= 0} {cpt=val;res=0;while(cpt>0){res=res+val,cpt=cpt-1}} {res=val²}
+
+-Composition
+{val >= 0} {cpt=val;res=0} {q?} ; {q?} {while(cpt>0){res=res+val,cpt=cpt-1}} {res=val²}
+
+-Composition
+{val >= 0} {cpt=val} {q2?} ; {q2?} {res=0} {q?} ; {q?} {while(cpt>0){res=res+val,cpt=cpt-1}} {res=val²}
+
+-Axiome
+|            Validé                        |
+{val >= 0} {cpt=val} {cpt >= 0, cpt = val} ; {cpt >= 0} {res=0} {q?} ; {q?} {while(cpt>0){res=res+val,cpt=cpt-1}} {res=val²}
+
+-Axiome
+|                                          Validé                                                |
+{val >= 0} {cpt=val} {cpt >= 0, cpt = val} ; {cpt >= 0} {res=0} {cpt >= res, cpt = val, res = 0} ; {q?} {while(cpt>0){res=res+val,cpt=cpt-1}} {res=val²}
+
+
+{cpt >= res, cpt = val, res = 0} {while(cpt>0){res=res+val,cpt=cpt-1}} {res=val²}
+
+-Boucle
+Invariant p = { res = val*val - val*cpt && cpt >= 0}
+//Pas sûr ici, mais après avoir trouvé l'invariant normalement c'est easy
+
+{cpt >= res, cpt = val, res = 0} {res = val*val - val*cpt && c>= 0} while (cpt > 0) res = res+val; cpt = cpt-1 { res = val*val - val*cpt && cpt >= 0 && cpt <= 0 }  {res=val²}
+
+{cpt >= res, cpt = val, res = 0}  { res = val*val - val*cpt && cpt >= 0 && cpt <= 0 } while (cpt > 0) res = res+val; cpt = cpt-1 {res = val*val - val*cpt && c>= 0}  {res=val²}
+
+-Conséquence
+{cpt >= res, cpt = val, res = 0} {res = val*val - val*cpt && c>= 0} while (cpt > 0) { res = val² }  {res=val²}

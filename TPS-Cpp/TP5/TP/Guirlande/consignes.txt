@@ -1,0 +1,17 @@
+Ayant investi en recherche et développement dans le projet de la classe Electrique, notre 
+direction souhaite maintenant commercialiser des Guirlandes. La première demande du 
+service marketing est de pouvoir paramétrer la création des Guirlandes. Le service 
+commercial souhaites intégrer les nouveaux produits dans la CRM (Gestion de la relation 
+client). 
+ 
+Pour le marketing, proposer un solution, basée sur la lecture de fichiers texte pour paramétrer la 
+création de Guirlandes. 
+  
+Ajouter les notions de prix d’achat pour les Ampoules et de coût de production* pour une 
+Guirlande. Calculer un prix de vente minimum (incluant une marge de 10%) pour chaque 
+Guirlande définies par le marketing.  
+ 
+Sauvegarder le résultat de vos calculs dans un fichier pour que les commerciaux puissent 
+intégrer les nouveaux produits et prix minimum dans la CRM (Gestion de la relation client). 
+  
+Cout de production = main-d’œuvre + prix du câble permettant de relier les Ampoules.

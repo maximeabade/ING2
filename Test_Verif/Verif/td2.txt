@@ -1,0 +1,20 @@
+EXO1 Minimum
+1. le plus petit element du tableau
+
+
+3. invariant de boucle : i<t.length && i>0 
+pour tout entier k, {k>=0 && k<i => t[k]>=res}
+ 
+4. variant: t.length - i
+
+
+EXO 2 Trie
+Precondition : t.length > 0 (car un tableau vide n est pas trié, mais ca compile)
+               OU t.length >=1 (car un tableau de taille 1 est trié)
+
+Postcondition : On renvoie le booleen de {pour tout i>=1&&i<t.length => t[i-1]<=t[i]}
+
+
+Invariant de boucle : pour tout entierk, k>=0 && k<i => t[k-1] < t[k]
+
+1.

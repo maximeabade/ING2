@@ -1,0 +1,6 @@
+altair
+polars==0.20.7
+pandas
+streamlit
+seaborn
+matplotlib

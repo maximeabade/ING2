@@ -1,0 +1,15 @@
+charger un notebook sur google collab
+
+plotly, matplotlib  ==> nuages de points|
+altair  ==>                 |--->data scrapping
+seaborn ==>                 |
+
+scikit-learn ==> machine learning
+tensorflow   ==> deep learning
+keras        ==> deep learning
+pytorch      ==> deep learning
+
+streamlit / Flask ==> web app, streamlit est plus simple
+
+!! Deep Learning, modeles et librairies dispo pour carte graphique NVIDIA
+

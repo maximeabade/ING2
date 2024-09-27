@@ -1,0 +1,2 @@
+LZ78.compress OK
+LZ.compress OK

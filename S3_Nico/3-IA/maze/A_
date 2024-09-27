@@ -1,0 +1,27 @@
+
+Exerice A* :
+
+Distance de Manhantan : distance la plus court en bougeant seulement verticalement et horizontalement.
+
+Heuristique :
+-> Sous évalue la réalité
+-> Décroie quand on se rapproche de l'arrivée
+-> Vaut 0 à l'arrivée
+
+
+Maze: page 14, Introduction à l'intelligense artificielle
+
+g = 0 at start, +1 per step
+h = heuristique
+f = g+h
+
+File (x,y,h) : (every line is the state of queue at each step)
+(3,1,5)
+(2,1,6) (4,1,6)
+(4,1,6) (1,1,8)
+(1,1,8) (5,1,8)
+(5,1,8) (1,2,8)
+(1,2,8) (5,2,8)
+
+End : (3,5,18)
+

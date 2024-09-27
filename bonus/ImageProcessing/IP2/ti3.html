@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Géométrie, Caméras et 3D reconstruction</title>
+    <meta charset="utf-8">
+    <style>
+     .left-column {
+       width: 50%;
+       float: left;
+     }
+     .right-column {
+       width: 50%;
+       float: right;
+     }
+     .grey { color: #bbbbbb; }
+      </style>
+    <link rel="stylesheet" type="text/css" href="slides.css">
+  </head>
+  <body>
+    <textarea id="source">
+
+# Les modèles de caméra
+
+Objectif: trouver une transformation qui, étant donné un point en 3D, nous donne sa position en pixels sur l'image
+
+On se doute qu'il faut connaitre plusieurs choses:
+
+** Paramètres extrinsèques: **
+- Position de la caméra: translation
+- Pose de la caméra: orientation
+
+** Paramètres intrinsèques: **
+- Paramètres internes de la caméra, focale, résolution...
+
+---
+
+# Le modèle sténopé
+
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/pine_without_hole.png" style="width: 600px;" />
+        <br/><br/>]
+
+Si nous plaçons un capteur devant un objet. Quelle image obtient-on?
+
+---
+
+# Le modèle sténopé
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/pinehole.png" style="width: 600px;" />
+        <br/><br/>]
+- Placer une barrière avec un trou.
+- Chaque partie du capteur ne reçoit de la lumière que d'une seule direction
+- Inconvénient: très peu de lumière arrive sur le capteur.
+
+
+---
+# Le modèle sténopé
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/lense_justification.png" style="width: 600px;" />
+        <br/><br/>]
+- Solution: augmenter la quantité de lumière avec une lentille.
+- Inconvénient: la profondeur de champ est limité.
+
+---
+# La caméra est une chambre
+
+Caméra vient de l'italien: camera (chambre)
+Connue d'Aristote
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/camera_oscura.png" style="width: 600px;" />
+        <br/><br/>]
+
+---
+
+
+# Le modèle sténopé
+
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/pinehole_start.png" style="width: 600px;" />
+        <br/><br/>]
+
+Dans notre cadre, on suppose que la caméra peut être approximée par un modèle sténopé.
+
+
+Ok, c'est parti.
+
+---
+# Matrice de caméra perspective
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/pinehole_shema.png" style="width: 400px;" />
+        <br/><br/>]
+
+- On veut faire correspondre les coordonnées (x, y) avec (u, v, w)
+- D'aprés Thalès, on a: 
+$$ x = \frac{u}{w} \times f, x = \frac{v}{w} \times f $$ 
+
+---
+
+# Homogéiniser les dimensions 
+
+- Coordonnées v, w, et f ne sont pas exprimées en pixels (e.g. en mètres).
+
+
+- Ajout d'un coefficient $\phi = \lambda \times f$: $$y = \frac{v}{w} \times \phi  = \frac{v}{w} \times \phi $$
+$\lambda$ représente la taille physique d'un pixel i.e. du capteur.
+- Le capteur n'est pas carré: différentes valeurs pour $x$ et $y$
+$$x = \frac{u}{w} \times f \times \lambda_x  = \frac{u}{w} \times \phi_x $$
+$$y = \frac{v}{w} \times f \times \lambda_y  = \frac{v}{w} \times \phi_y $$
+
+---
+# Coordonnées dans l'image
+
+- Le système de coordonnées de l'image: (0,0) n'est pas au centre
+Par exemple, en haut à gauche pour les tableau numpy
+- Ajout d'un terme compensatoire:
+$$x = \frac{u}{w}  \times \phi_x + \sigma_x $$
+$$y = \frac{v}{w} \times \phi_y + \sigma_y $$
+
+
+$(\sigma_x, \sigma_y)$ peut être interprété comme la position du centre de l'image.
+---
+
+
+# Écriture matricielle: 
+
+Nous avons obtenu:
+$$\begin{pmatrix}x \\\ y \end{pmatrix}=\begin{pmatrix} \frac{u}{w} \times \phi_x + \sigma_x  \\\  \frac{v}{w} \times \phi_y + \sigma_y  \end{pmatrix}$$ 
+
+- Utilisation de coordonnées homogènes:
+$$w\begin{pmatrix}x \\\ y \\\ 1\end{pmatrix}=
+\begin{pmatrix}
+\phi_x & 0     &\sigma_x \\\
+0      &\phi_y &\sigma_y \\\
+0      & 0     &  1     
+\end{pmatrix}
+\begin{pmatrix}
+u \\\
+v \\\
+w
+\end{pmatrix}
+$$
+
+- ** $\phi_x, \phi_y, \sigma_x, \sigma_y$ sont les paramètres intrinsèques de la caméra.**
+
+---
+
+# Position et orientation de la caméra 
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/extrins.png" style="width: 600px;" />
+        <br/><br/>]
+
+Coordonnées $(u,v,w)$ exprimées dans le repère $\mathcal{C}= (O,i,j,k)$:
+
+- $O$ est le centre optique, c.a.d. la position de la caméra,
+- $i$ est la direction de l'axe optique,
+- $j$ et $k$ correspondent aux axes $y$ et $x$ de l'image.
+
+
+Problème: cadre trop restrictif e.g. si plusieurs caméras
+---
+
+# Changemement de repère
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/change_frame.png" style="width: 600px;" />
+        <br/><br/>]
+
+- Supposer $(u,v,w)$ exprimées dans un repère arbitraire "du monde" noté $\mathcal{W}$. 
+- Calculer $(u^c,v^c,w^c)$, expression de $(u,v,w)$ dans le repère $\mathcal{C}=(t^c, i^c, j^c, k^c)$:
+
+\- $t^c$ centre optique exprimé dans $\mathcal{W}$ <br>
+\- $i^c, j^c, k^c$ orientation de la caméra exprimée dans $\mathcal{W}$.
+
+---
+# Changement de repère: solution
+
+$$
+ \begin{pmatrix}
+ u^c \\\
+ v^c \\\
+ w^c
+ \end{pmatrix}
+= R \times 
+ ( \begin{pmatrix}
+ u \\\
+ v \\\
+ w \\\
+ \end{pmatrix}
+\-  t^c)
+=
+\begin{pmatrix}
+R & -Rt^c
+\end{pmatrix}
+ \begin{pmatrix}
+  u \\\
+   v \\\
+    w \\\
+    1 \\\
+     \end{pmatrix}
+$$ 
+
+
+- avec $R \in \Re^{3,3}$ la matrice de rotation correspondant à $(i^c, j^c, k^c)$,
+
+- $R$ est aussi appelée l'orientation de la caméra, et forme avec $t^c$ ** les paramètres extrinsèques **.
+---
+
+# Modèle de caméra perspective
+
+La position du point $(u,v,w)$ sur l'image est calculée par: 
+$$\rho\begin{pmatrix}x \\\ y \\\ 1\end{pmatrix}=
+\begin{pmatrix}
+\phi_x & 0     &\sigma_x \\\
+0      &\phi_y &\sigma_y \\\
+0      & 0     &  1
+\end{pmatrix}
+\begin{pmatrix}
+      &     &  &\\\
+      &R    & T & \\\
+      &      & &
+\end{pmatrix}
+\begin{pmatrix}
+u \\\
+v \\\
+w \\\
+1
+\end{pmatrix}
+$$
+
+avec $T=-Rt^c$
+
+---
+# Pour mieux se rendre compte 
+Le site de Kyle Simek propose une simulation live:
+
+<a href="http://ksimek.github.io/perspective_camera_toy.html">http://ksimek.github.io/perspective_camera_toy.html</a>
+---
+
+# Simplification
+- Caméra orthographique: retirer la perspective.
+- Suppose que la distance centre optique-objet est infinie
+- Ok si profondeur de la scène $<< $ distance caméra-objet.
+$$
+\begin{pmatrix}
+x \\\
+y \\\
+1
+\end{pmatrix}
+= 
+\begin{pmatrix}
+1 & 0     & 0 & 0 \\\
+0      &1 & 0  & 0 \\\
+0      & 0&  0   &  1
+\end{pmatrix}
+\begin{pmatrix}
+      &     &  &\\\
+      &R    & B & \\\
+      &      & &
+\end{pmatrix}  
+\begin{pmatrix}
+u \\\
+v \\\
+w \\\
+1
+\end{pmatrix}
+$$
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/orthographique_camera.png" style="width: 400px;" />
+        <br/><br/>] 
+---
+
+# Caméra orthographique 
+
+$$
+\begin{pmatrix}
+x \\\
+y 
+\end{pmatrix}
+= 
+\begin{pmatrix}
+1 & 0     & 0  \\\
+0      &1 & 0  \\\
+\end{pmatrix}
+\begin{pmatrix}
+      & R_1    & b_1 &\\\
+      &R_2    & b_2 & \\\
+\end{pmatrix}  
+\begin{pmatrix}
+u \\\
+v \\\
+w \\\
+1
+\end{pmatrix},
+$$
+
+avec $R_1$ et $R_2$ les 2 premières lignes de la matrice de rotation de la caméra.
+
+- Cela consiste à séléctionner les coordonnées $u$ et $v$ et les associer à $x$ et $y$.
+- Aussi appelée projection parallèle
+
+---
+
+# D'autres éléments de modélisation
+
+- Skew pour la non orthogonalité des pixels
+- Autres modèles de caméras: Perspective faible
+- ...
+
+
+---
+
+# Autocalibration et estimation de la structure
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/rome.jpg" style="width: 400px;" />
+        <br/><br/>]
+
+#### ACM Communication 2011 - Agarwal et al. Building Rome in a Day. 
+---
+# Intuition de la triangulation
+
+Supposons que l'on ait deux images et qu'on connait les coordonnées des points 2D $x_i$ et les matrices de caméras $P_i$. 
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/triangulation.png" style="width: 400px;" />
+        <br/><br/>]
+
+
+Nous retrouvons la coordonnée 3D $X_1$, à partir des équations: 
+$$x_1 = P_2 X_1 $$
+$$x_2 =P_2 X_2$$
+
+
+---
+
+# Mesures bruitées
+
+En pratique, on cherche à minimiser l'erreur de reprojection.
+.center[<img src="https://paulgay.github.io/images/cours_ti2/triangulation_real_world.png" style="width: 400px;" />
+        <br/><br/>]
+	
+$$min_{X, P}\text{ }   d( P_1 X_1, x_1 )  +  d (P_2 X_1 - x_2 )$$
+
+avec $d$ une distance entre coordonnées homogènes
+
+Fonction de coût non supervisée pour un réseau de neurones!
+---
+
+# Structure à partir du mouvement. 
+Supposons $F$ images et qu'on connait les coordonnées des points 2D $x\_{ij}$ avec $x\_{ij}$ l'observation de $X_j$ par la caméra $P_i$ 
+.center[<img src="https://paulgay.github.io/images/cours_ti2/sfm.png" style="width: 300px;" />]
+Objectif : retrouver les paramètres des caméras $P\_i$ et les coordonnées 3D $X\_j$ 
+
+---
+
+# Tomasi and Kanade
+
+- Permet de trouver une solution dans le cas orthographique 
+$$P_i = \begin{pmatrix} M_i & t_i \end{pmatrix}  $$
+avec $M_i$ une matrice $2\times 3$ contenant les 2 premières lignes de la matrice de rotation $R_i$.
+
+- Minimisation de l'erreur de reprojection
+
+$$argmin\_{P, X} \sum\_i \sum\_j || x\_{ij} - \begin{pmatrix} M_i & t_i \end{pmatrix} X\_j || $$
+
+---
+
+# Étape 1 : Centrer les données 
+
+$$\hat{x}\_{ij} = x\_{ij} - \bar{x}\_{ij} = x\_{ij} - \frac{1}{n} \sum\_{j} x\_{ij} $$
+Centrer les données en 2D $\Rightarrow$ Centrage en 3D et retirer les $t\_i$
+$$
+\begin{split}
+\hat{x}\_{ij} & = x\_{ij} - \frac{1}{N}\sum\_i x\_ij \\\
+              & = M_iX_j + t_i - \frac{1}{N} \sum_j (M_iX_j + t_i) \\\
+	      & = M_i( X_j - \frac{1}{N} \sum_j X_j) \\\
+	      & = M_i( X_j - \bar{X}_i) \\\
+	      & = M_i\hat{X_j} 
+\end{split}
+$$
+
+
+---
+
+# Construction du système
+
+Formulation sous forme de factorisation matricielle:
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/system.png" style="width: 500px;" />
+        <br/><br/>]
+
+- $D$ : Matrice $2F\times O$ contenant les coordonnées 2D observées
+- $M_i$: Matrice $2\times 3$ : lignes 1 et 2 de $R_i$
+- $X$: Matrice $3\times O$ contenant les coordonnées des point 3D.
+- $F$: le nombre d'images, $O$: le nombre de points 3D
+---
+
+# Étape 2: décomposition en valeurs singulières
+
+En théorie, D est de rang 3 et peut donc être décomposée ainsi:
+
+<span style="font-size:0.7em;">
+$$ 
+\begin{split}
+D &= U \Sigma V^T \\\
+  &= \begin{pmatrix} u1 & u2 & u3 & \dots \end{pmatrix}
+  \begin{pmatrix} \sigma_1 &  0 & 0 & 0 & \dots \\\
+  0 & \sigma_2 & 0        & 0 &  \\\
+  0 &     0    & \sigma_3 & 0 & \vdots \\\
+  0 &     0    &   0      & 0 &  \\\
+    &          &  \dots   &   &  \\\
+  \end{pmatrix} 
+  \begin{pmatrix} v_1^T  \\\  v_2^T \\\ v_3^T \\\ \vdots \end{pmatrix} \\\
+& =  \begin{pmatrix} u1 & u2 & u3 & \end{pmatrix}
+  \begin{pmatrix} \sigma_1 &  0 & 0  \\\
+  0 & \sigma_2 & 0         \\\
+  0 &     0    & \sigma_3  \\\
+  \end{pmatrix}
+  \begin{pmatrix} v_1^T  \\\  v_2^T \\\ v_3^T  \end{pmatrix}= U_3 \Sigma_3 V_3^T
+\end{split}  
+$$
+</span>
+
+---
+
+# Solution finale
+
+- En pratique, les $\sigma_i, i>3$ ne sont pas nuls.  
+
+Prendre les 3 $\sigma_i$ les plus élevés.
+
+Meilleure approximation au sens de la norme de Frobenius
+$$ M = \sqrt{\Sigma_3} U_3, X = \sqrt{\Sigma_3} V_3^T $$
+
+
+Note: La solution de la factorisation n'est pas unique:
+$$D = MX = (M H) (H^{-1} X) $$
+
+Il n'est pas possible de retirer cette ambiguité
+---
+# Résumé du Structure from motion
+
+\- 1) Trouver des correspondances entre les images <br>
+\- 2) Former la matrice des observations <br>
+\- 3) Factoriser cette matrice <br>
+- Si caméra orthographique: Tomasi and Kanade <br>
+--
+Autres remarques : 
+- Si caméra perspective: optimisation non linéaire
+- Même difficultés que pour estimer les transformations affines <br>
+Mesures bruitées par des points aberrants 
+- Certains points ne sont pas visibles dans toutes les images <br>
+Factorisation matricielle avec valeur manquantes
+
+Très bons résultats des méthodes actuelles: meshroom, COLMAP,...
+
+    </textarea>
+    <style TYPE="text/css">
+      code.has-jax {font: inherit; font-size: 100%; background: inherit; border: inherit;}
+    </style>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+      tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] // removed 'code' entry
+      }
+      });
+      MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i = 0; i < all.length; i += 1) {
+		     all[i].SourceElement().parentNode.className += ' has-jax';
+		     }
+		     });
+		     </script>
+         <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+         <!-- <script type="text/javascript" src="/home/yann/Programs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+        highlightStyle: 'github',
+        highlightSpans: true,
+        highlightLines: true
+      });
+    </script>
+  </body>
+</html>

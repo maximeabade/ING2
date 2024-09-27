@@ -1,0 +1,6 @@
+polars==0.20.7
+mariadb
+sentence_transformers
+keybert
+cleantext
+codecarbon

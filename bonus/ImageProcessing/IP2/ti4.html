@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Géométrie, Caméras et 3D reconstruction</title>
+    <meta charset="utf-8">
+    <style>
+     .left-column {
+       width: 50%;
+       float: left;
+     }
+     .right-column {
+       width: 50%;
+       float: right;
+     }
+     .grey { color: #bbbbbb; }
+      </style>
+    <link rel="stylesheet" type="text/css" href="slides.css">
+  </head>
+  <body>
+    <textarea id="source">
+---
+# Application pour Aujourd'hui: Structure from Motion with Objects
+
+Structure à partir du mouvement avec des objets
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/sfmo.png" style="width: 400px;" />
+        <br/><br/>]
+
+
+---
+
+# Motivation
+.left-column[
+Géométrie
+.center[<img src="https://paulgay.github.io/images/cours_ti2/Cambridge.png" style="width: 200px;" />
+<br/> ]
+- :) Marche très bien pour la reconstruction
+- :( Liste de points 3D sans étiquettes sémantiques 
+]
+.right-column[
+Deep learning
+.center[<img src="https://paulgay.github.io/images/cours_ti2/segmentation.jpeg" style="width: 300px;" />
+<br/> ]
+- :) Prédit des étiquettes sur les pixels
+- :( Peu/pas d'a priori sur la structure
+]
+
+
+---
+
+# Résumé en une slide
+
+Essentiellement, c'est la méthode de Tomasi et Kanade appliquée sur des objets. 
+
+- Détection des objets
+- Association / tracking à travers les images
+- Centrer les données
+- Construction de la matrice des observations
+- Factorization : calcul de la caméra orthographique M et des centres 3D des objets.
+- Utiliser les caméras M pour retrouver le reste de la forme en 3D des objets.
+
+---
+
+# Représentations Géométriques: 
+
+- Une ligne $l$ en 2D est représentée par trois paramètres $(a, b, c)$ tels que: 
+
+
+
+$$\forall x = (u, v, 1)^T \in l, l^Tx =0 \text{ avec } l  = (a,b,c)^T$$
+
+---
+
+# Représentations Géométriques: 
+
+
+- Un cercle O centré en $(0,0)$ est représenté par son rayon $r$
+
+$$\forall x = (u, v, 1)^T \in O, ur^2 + vr^2 -1 = 0$$
+
+Ou en écriture matricielle: 
+$$
+\begin{pmatrix}
+u & v & 1
+\end{pmatrix}
+\begin{pmatrix}
+r^2 & 0 & 0 \\\
+0   & r^2 & 0 \\\
+0   & 0 & -1 
+\end{pmatrix}
+\begin{pmatrix}
+u \\\ 
+v \\\ 
+1
+\end{pmatrix}=x^TCx = 0
+$$
+La matrice $C$ encode le cercle $O$
+
+
+---
+
+
+# Coniques (ellipses)
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/ellispes.png" style="width: 300px;" />
+<br/> ]
+
+$$C=
+\begin{pmatrix}
+c_1 & c_2 & -t_1^c \\\
+c_2 & c_3 & -t_2^c \\\
+-t_1^c  & -t_2^c & -1 \\\
+\end{pmatrix}
+$$
+
+Avec $(t_1^c, t_2^c)$ le centre de l'ellipse et $c_i,i=1\dots 3$ les paramètres de sa forme (orientation et longueurs des axes).
+
+
+---
+
+# Quadriques (ellipsoïdes)
+
+.center[<img src="https://paulgay.github.io/images/cours_ti2/ellispoids.png" style="width: 300px;" />
+<br/> ]
+
+$$Q =
+\begin{pmatrix}
+q_1 & q_2 & q_3 &  -t_1^q \\\
+q_2 & q_4 &  q_5 & -t_2^q \\\
+q_3 & q_5 &  q_6 & -t_3^q \\\
+-t_1^q & -t_2^q & -t_3^q & -1 \\\
+\end{pmatrix}
+$$
+
+
+Avec $(t_1^q, t_2^q, t_3^q)$ le centre du quadrique et $q_i, i=1\dots 6 $ les paramètres de sa forme.
+
+
+
+
+---
+
+# Leurs relations
+
+La matrice d'un conique est reliée à la caméra P et au quadrique Q par la formule:
+
+$$C = PQP^T, 
+P =\begin{pmatrix}
+R & t \\\
+0 & 1 \\\
+\end{pmatrix}
+$$
+
+
+Centrer les données va nous permettre de simplifier le problème et de retirer $t$.
+$$\hat{C} = \hat{P}\hat{Q}\hat{P}^T
+, \hat{P} =\begin{pmatrix}
+R & 0 \\\
+0 & 1 \\\
+\end{pmatrix}
+$$
+
+
+
+---
+# Vectorization du problème 
+
+- Réarrangement des matrices sous forme de vecteurs.
+- Séparation des parties traitant reliant les centres et les formes.
+
+$$
+\begin{pmatrix}
+c_1 \\\
+c_2 \\\
+c_3 \\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+G 
+\end{pmatrix}
+\begin{pmatrix}
+q_1 \\\
+\vdots \\\
+q_6 \\\
+\end{pmatrix}
+,
+\begin{pmatrix}
+t_1^c \\\
+t_2^c \\\
+\end{pmatrix}
+=
+R^{1,2} 
+\begin{pmatrix}
+t_1^q \\\
+t_2^q \\\
+t_3^q \\\
+\end{pmatrix}
+$$
+
+- Où G est une matrice dont les coefficients sont calculés à partir de $R$,
+- $R^{1,2}$ contient les deux premières lignes  de la matrice de rotation de la caméra orthographique $P$
+---
+# Solution 
+
+- Obtenir les caméras R et les centres $t^q$ des ellipsoides:
+
+Méthode de Tomasi et Kanade avec les centres des ellipses $t^c$ comme observations.
+
+- Obtenir la forme des ellipsoides  $s^q=\begin{pmatrix} q_1 & \dots & q_6 \end{pmatrix}^T$ 
+
+Construire la matrice G à partir de R (code fourni)
+
+Résoudre le système linéaire suivant avec la méthode de la pseudo inverse
+
+$$s^q  = (GG^T)^{-1}G \begin{pmatrix}c_1 \\\ c_2 \\\ c_3 \end{pmatrix} $$
+
+
+---
+
+# Bibliography
+
+LE livre de référence sur le sujet
+- Multiple View Geometry in Computer Vision, Richard Hartley et Andrew Zisserman
+
+Ce cours est aussi inspiré de:
+- CS231A Computer Vision, From 3D Reconstruction to Recognition. Stanford Class. Silvio Savarese
+
+<a href="http://web.stanford.edu/class/cs231a/">http://web.stanford.edu/class/cs231a/</a> 
+
+- CSCI 1430: Introduction to Computer Vision. Brown university. James Tompkin
+<a href="https://cs.brown.edu/courses/csci1430/">https://cs.brown.edu/courses/csci1430/</a>
+
+- Vision 3D artificielle. École des Ponts ParisTech. Pascal Monasse
+
+<a href="http://imagine.enpc.fr/~monasse/Stereo/">http://imagine.enpc.fr/~monasse/Stereo/</a>
+
+---
+
+class: middle, center
+
+## Lab : Manipulation de caméras et reconstruction 3D. 
+
+#### Ouvrir le fichier: <font color="blue">TP_sfmo.ipynb_</font>
+
+    </textarea>
+    <style TYPE="text/css">
+      code.has-jax {font: inherit; font-size: 100%; background: inherit; border: inherit;}
+    </style>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+      tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] // removed 'code' entry
+      }
+      });
+      MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i = 0; i < all.length; i += 1) {
+		     all[i].SourceElement().parentNode.className += ' has-jax';
+		     }
+		     });
+		     </script>
+         <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+         <!-- <script type="text/javascript" src="/home/yann/Programs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+        highlightStyle: 'github',
+        highlightSpans: true,
+        highlightLines: true
+      });
+    </script>
+  </body>
+</html>

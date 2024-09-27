@@ -1,0 +1,84 @@
+
+Exercice 1 :
+
+1 . Une entreprise de services du numérique (ESN), anciennement société de services en ingénierie informatique1 (anciennement SSII ou SS2I), est une société de services experte dans le domaine des nouvelles technologies et de l’informatique. Elle peut englober plusieurs métiers (conseil, conception et réalisation d’outils, maintenance ou encore formation) et a pour objectif principal d’accompagner une société cliente dans la réalisation d’un projet.
+
+Elle se distingue du métier d'éditeur de logiciel et de celui de la société de conseil en technologie spécialisée en maîtrise d'ouvrage, ces trois activités formant le secteur des activités informatiques. 
+
+
+2 . 
+
+1 CAPGEMINI 3 017 000
+
+2 SOPRA STERIA 2 216 926
+
+3 IBM 2 135 900
+
+4 ATOS 1 788 000
+
+5 ACCENTURE 1 785 557
+
+6 SCC 1 672 954
+
+7 ECONOCOM 1 545 000
+
+8 ORANGE BUSINESS SERVICES 1 487 000
+
+9 CGI 1 185 928
+
+10 ALTEN 1 125 000
+
+
+3 .
+
+De 1 à 7 ce sont des grandes entreprises : CA > 1.5 milliard
+8,9 et 10 sont des entreprises de taille intermédiaire
+
+
+4 .
+
+Responsabilité limité : les investisseurs/propriétaires ne peuvent pas perdre plus que ce qu'ils ont investi/contribué dans l'entreprise en cas de faillite
+Responsabilité illimité : les investisseurs/propriétaires doivent payer la totalité de la dette de l'entreprise en cas de faillite. i.e vendre ses biens personnels si besoin
+
+Légende :
+SASU Société par actions simplifiée à associé unique
+
+CAPGEMINI : SASU, Responsabilité limité
+SOPRA STERIA : SA à conseil d'administration, Responsabilité limité
+
+
+5 . 
+Sur le téco
+
+6 .
+
+7 . 
+
+Avantages : 
+	- atténuer les conséquences de la chute des crédits bancaires durant une crise financière	
+	- renforcer les fonds propres
+	- favoriser l’innovation et la croissance
+	- améliorer la visibilité
+	- rassurer clients et partenaires
+	- attirer de nouvelles recrues
+
+Inconvénients :
+	- quelques acheteurs ou quelques vendeurs pour faire monter ou baisser les cours des actions de l’entreprise dans des proportions marquées
+
+
+
+
+Exercice 2 :
+
+compte de résultat p232
+bilan (actif,passif) p233
+
+
+
+
+
+
+
+
+
+

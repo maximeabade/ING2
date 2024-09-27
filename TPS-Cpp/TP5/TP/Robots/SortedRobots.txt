@@ -1,0 +1,13 @@
+Nom: tamadochi, Type: Fun, Prix: 1
+Nom: LittleSophia, Type: Humanoid, Prix: 150
+Nom: ParrotARDrone, Type: Teleoperated, Prix: 150
+Nom: Mindstorm, Type: Education, Prix: 300
+Nom: Wall-e, Type: Pre-programmed, Prix: 344
+Nom: Roomba, Type: Autonomous, Prix: 500
+Nom: TurtleBot, Type: Autonomous, Prix: 590
+Nom: NAO, Type: Humanoid, Prix: 7000
+Nom: Kuka, Type: Industry, Prix: 21900
+Nom: Spot, Type: Explorer, Prix: 74500
+Nom: Atlas, Type: Humanoid, Prix: 750000
+Nom: Curiosity, Type: Rover, Prix: 2500000
+Nom: daVinci, Type: Health, Prix: 65000000

@@ -1,0 +1,32 @@
+/home/max/.stack/programs/x86_64-linux/ghc-tinfo6-9.6.4/lib/ghc-9.6.4/lib/x86_64-linux-ghc-9.6.4/rts-1.0.2/include/ghcversion.h:
+  hash: cbc0ab805e5b827180e3116cecd3f6665988df7f45a6b64f0e09ea8c25c438ff
+? /home/max/Bureau/Work/ECOLE/ING2-EISTI/Semestre4/Programmation_fonctionnelle/Max/Cours/Project/compress/.stack-work/dist/x86_64-linux-tinfo6/ghc-9.6.4/build/autogen/Paths_compress.hs
+: hash: 317e03e7f8347375a682c186a504ea2e56a20500ccd267b3f4c8e2eb24c4ebf4
+? /home/max/Bureau/Work/ECOLE/ING2-EISTI/Semestre4/Programmation_fonctionnelle/Max/Cours/Project/compress/.stack-work/dist/x86_64-linux-tinfo6/ghc-9.6.4/build/autogen/cabal_macros.h
+: hash: ca76cf80669b696a9364ab0b557a42bc6544343bca69ad738e86dad7299dc4d3
+/home/max/Bureau/Work/ECOLE/ING2-EISTI/Semestre4/Programmation_fonctionnelle/Max/Cours/Project/compress/README.md:
+  hash: 7f6ec72bea21eebede75267b06a8efad22e5919039f77489b8650996341db4c6
+/home/max/Bureau/Work/ECOLE/ING2-EISTI/Semestre4/Programmation_fonctionnelle/Max/Cours/Project/compress/compress.cabal:
+  hash: eed98f101057d538656ee97349f688f49394734679f82e79b5c6d8ac9b21c41e
+/home/max/Bureau/Work/ECOLE/ING2-EISTI/Semestre4/Programmation_fonctionnelle/Max/Cours/Project/compress/package.yaml:
+  hash: 2b64bd9a851440e33a63ecd8400d9b4be0bb832a74cc67f8b36ad89e07ec5b6c
+/home/max/Bureau/Work/ECOLE/ING2-EISTI/Semestre4/Programmation_fonctionnelle/Max/Cours/Project/compress/src/LZ/Dictionaries.hs:
+  hash: 53268c82d4eea3a73c3ef489e9ede417976e4fce863eb4bdc1bba9c74c2f8690
+/home/max/Bureau/Work/ECOLE/ING2-EISTI/Semestre4/Programmation_fonctionnelle/Max/Cours/Project/compress/src/LZ/LZ78.hs:
+  hash: 466845e3ac30816b6f432f06fa4f434a1c6d5ddece07bbea9a4c4b26b565ff93
+/home/max/Bureau/Work/ECOLE/ING2-EISTI/Semestre4/Programmation_fonctionnelle/Max/Cours/Project/compress/src/LZ/LZW.hs:
+  hash: e7aca34a1c0115f00e22e7160456fbeda4fc4dfc5dfc5b6c2866792e95464356
+/home/max/Bureau/Work/ECOLE/ING2-EISTI/Semestre4/Programmation_fonctionnelle/Max/Cours/Project/compress/src/RLE.hs:
+  hash: e3ec379ad21dbba81862a2506c8e18d02a268e7966c3ffea2b0e9b556e5fa6a3
+/home/max/Bureau/Work/ECOLE/ING2-EISTI/Semestre4/Programmation_fonctionnelle/Max/Cours/Project/compress/src/Statistic/Bit.hs:
+  hash: 0123d1412febd6d3b9e9fea6fc18c93dbcb76b7a89afa56baba5b90c57f33fa7
+? /home/max/Bureau/Work/ECOLE/ING2-EISTI/Semestre4/Programmation_fonctionnelle/Max/Cours/Project/compress/src/Statistic/EncodingTree.hs
+: hash: 98337c791ad2b53deb16280a5c2a58568eceb6aea1789098c076e288c6549920
+/home/max/Bureau/Work/ECOLE/ING2-EISTI/Semestre4/Programmation_fonctionnelle/Max/Cours/Project/compress/src/Statistic/Huffman.hs:
+  hash: e987981d9d120861e43b6621a09c867f3db7ac03c2979a2b11bbc0a971068287
+? /home/max/Bureau/Work/ECOLE/ING2-EISTI/Semestre4/Programmation_fonctionnelle/Max/Cours/Project/compress/src/Statistic/ShannonFano.hs
+: hash: 172695b2467a93e0197c5c4297661e8424c5d405a68c9425ab882cc8faedb200
+/home/max/Bureau/Work/ECOLE/ING2-EISTI/Semestre4/Programmation_fonctionnelle/Max/Cours/Project/compress/src/Statistic/Source.hs:
+  hash: 87cefaca8405604f731257d366ad09e1375d7a588dbfd8fca11727870d96e5b0
+/usr/include/stdc-predef.h:
+  hash: cb08cd5d4cc059a90833ac48a284d25016e8d56ded8ad4cd98d8ac59cc5053f3

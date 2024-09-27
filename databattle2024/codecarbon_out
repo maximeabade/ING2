@@ -1,0 +1,17 @@
+First test on 6 queries
+[codecarbon INFO @ 13:12:31] Energy consumed for RAM : 0.000152 kWh. RAM Power : 5.764580726623536 W
+[codecarbon INFO @ 13:12:31] Energy consumed for all CPUs : 0.000370 kWh. Total CPU Power : 14.0 W
+[codecarbon INFO @ 13:12:31] 0.000522 kWh of electricity used since the beginning.
+[codecarbon INFO @ 13:12:31] Done!
+
+Second test on 6 queries after optimization
+[codecarbon INFO @ 17:15:21] Energy consumed for RAM : 0.000002 kWh. RAM Power : 5.764580726623536 W
+[codecarbon INFO @ 17:15:21] Energy consumed for all CPUs : 0.000005 kWh. Total CPU Power : 14.0 W
+[codecarbon INFO @ 17:15:21] 0.000007 kWh of electricity used since the beginning.
+[codecarbon INFO @ 17:15:21] Done!
+
+Creating solutions embeddings - cpu
+[codecarbon INFO @ 15:45:57] Energy consumed for RAM : 0.000066 kWh. RAM Power : 5.764580726623536 W
+[codecarbon INFO @ 15:45:57] Energy consumed for all CPUs : 0.000161 kWh. Total CPU Power : 14.0 W
+[codecarbon INFO @ 15:45:57] 0.000227 kWh of electricity used since the beginning.
+[codecarbon INFO @ 15:45:57] Done!

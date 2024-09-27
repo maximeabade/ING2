@@ -1,0 +1,55 @@
+﻿Introduction au TestExercice d'illustration du cours
+Debuggage de programme (d'après  Introduction to Software Testing by Paul Ammann and Jeff Offutt) : 
+
+Soit le code faux suivant:
+
+public static int lastZero (int[] x) {​​​​​​​​
+    //Effects: if x==null throw NullPointerException
+    //else return the index of the LAST 0 in x.
+    //Return -1 if 0 does not occur in x
+    
+    for (int i = 0; i < x.length; i++) {​​​​​​​​
+       if (x[i] == 0) {​​​​​​​​
+          return i;
+       }​​​​​​​​
+    }​​​​​​​​
+    return -1;
+}​​​​​​​​
+// test: x=[0, 1, 0]
+//Expected = 2
+   
+1 - Dessiner le GFC
+2 - Identifier l'erreur
+3 - Si possible, trouver un CT qui exécute l'erreur mais qui provoque un problème qui ne se voit pas.
+4 - Si possible, trouver un CT qui  exécute l'erreur mais ne provoque pas problème.
+5 - Si possible, trouver un CT qui n'exécute pas l'erreur
+
+6 - Corriger l'erreur et vérifier que le CT fournit maintenant le résultat attendu
+ 
+ 
+1 - 
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2 – Retourne le premier 0 pas le dernier
+
+3 – Tableau contenant un unique 0
+
+4 – Tableau sans 0
+
+5 – Tableau null
+
+6 - 

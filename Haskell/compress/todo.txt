@@ -1,0 +1,15 @@
+FINIR LZ - MAXIME ==> LZ78 : COMPRES ==> la mise en forme 0,char est bonne. mtnt reste à créer le dictionnaire qui s autoalimente avec les modeles obtenus par la concatenation ==> a faire, creation dico + utilisation des models et de leurs index pour la compression
+                             UNCOMPRESS ==> La décompression avec du 0,char marche bien ==> a faire, remise en formee du resultat de la compression en 0,char pour ensuite la passer comme parametre à la decompression 
+                             ==> COMPRESS STRING  =  ATOMISATION DE STRING A 0CHAR puis CREATION DICO + INDEXATION POUR LA COMPRESSION
+                             ==> DECOMPRESS STRING = INDEXATION +  DECOMPRESSION AVEC DICO + 0CHAR A STRING + DECOMPRESSION 0,CHAR 
+STATISTIC _______
+                |__ HUFFMAN ----------Capdeville
+                |
+                |__ SHANNON-FANO -----Capdeville
+                |
+                |__ SOURCE -----------Gustave
+                |
+                |__ ENCODING TREE ----Ugo
+
+RLE ---------------------------------- Raph
+

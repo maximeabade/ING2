@@ -1,0 +1,93 @@
+2023-02-20 15:46:04,089 - pyswarms.single.global_best - INFO - Optimize for 1000 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2023-02-20 15:46:05,391 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 0.9949590570932898, best pos: [ 1.49519992e-09 -9.94958638e-01]
+2023-02-20 15:46:40,211 - pyswarms.single.global_best - INFO - Optimize for 1000 iters with {'c1': 1.47, 'c2': 1.47, 'w': 0.7}
+2023-02-20 15:46:41,663 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 0.9949590570932898, best pos: [ 9.94958637e-01 -3.89815238e-10]
+2023-02-20 15:47:18,126 - pyswarms.backend.generators - ERROR - Bounds and/or init_pos should be of size (10,)
+Traceback (most recent call last):
+  File "/home/cytech/.pyenv/versions/3.10.0/lib/python3.10/site-packages/pyswarms/backend/generators.py", line 81, in generate_swarm
+    pos = center * np.random.uniform(
+  File "mtrand.pyx", line 1131, in numpy.random.mtrand.RandomState.uniform
+  File "_common.pyx", line 562, in numpy.random._common.cont
+  File "_common.pyx", line 479, in numpy.random._common.cont_broadcast_2
+  File "__init__.pxd", line 742, in numpy.PyArray_MultiIterNew3
+ValueError: shape mismatch: objects cannot be broadcast to a single shape
+2023-02-20 15:48:48,009 - pyswarms.backend.generators - ERROR - Bounds and/or init_pos should be of size (10,)
+Traceback (most recent call last):
+  File "/home/cytech/.pyenv/versions/3.10.0/lib/python3.10/site-packages/pyswarms/backend/generators.py", line 81, in generate_swarm
+    pos = center * np.random.uniform(
+  File "mtrand.pyx", line 1131, in numpy.random.mtrand.RandomState.uniform
+  File "_common.pyx", line 562, in numpy.random._common.cont
+  File "_common.pyx", line 479, in numpy.random._common.cont_broadcast_2
+  File "__init__.pxd", line 742, in numpy.PyArray_MultiIterNew3
+ValueError: shape mismatch: objects cannot be broadcast to a single shape
+2023-02-20 15:49:43,557 - pyswarms.backend.generators - ERROR - Bounds and/or init_pos should be of size (10,)
+Traceback (most recent call last):
+  File "/home/cytech/.pyenv/versions/3.10.0/lib/python3.10/site-packages/pyswarms/backend/generators.py", line 81, in generate_swarm
+    pos = center * np.random.uniform(
+  File "mtrand.pyx", line 1131, in numpy.random.mtrand.RandomState.uniform
+  File "_common.pyx", line 562, in numpy.random._common.cont
+  File "_common.pyx", line 479, in numpy.random._common.cont_broadcast_2
+  File "__init__.pxd", line 742, in numpy.PyArray_MultiIterNew3
+ValueError: shape mismatch: objects cannot be broadcast to a single shape
+2023-02-20 15:49:57,270 - pyswarms.backend.generators - ERROR - Bounds and/or init_pos should be of size (1,)
+Traceback (most recent call last):
+  File "/home/cytech/.pyenv/versions/3.10.0/lib/python3.10/site-packages/pyswarms/backend/generators.py", line 81, in generate_swarm
+    pos = center * np.random.uniform(
+  File "mtrand.pyx", line 1131, in numpy.random.mtrand.RandomState.uniform
+  File "_common.pyx", line 562, in numpy.random._common.cont
+  File "_common.pyx", line 480, in numpy.random._common.cont_broadcast_2
+  File "_common.pyx", line 229, in numpy.random._common.validate_output_shape
+ValueError: Output size (25, 1) is not compatible with broadcast dimensions of inputs (25, 2).
+2023-02-20 15:50:03,632 - pyswarms.backend.generators - ERROR - Bounds and/or init_pos should be of size (1,)
+Traceback (most recent call last):
+  File "/home/cytech/.pyenv/versions/3.10.0/lib/python3.10/site-packages/pyswarms/backend/generators.py", line 81, in generate_swarm
+    pos = center * np.random.uniform(
+  File "mtrand.pyx", line 1131, in numpy.random.mtrand.RandomState.uniform
+  File "_common.pyx", line 562, in numpy.random._common.cont
+  File "_common.pyx", line 480, in numpy.random._common.cont_broadcast_2
+  File "_common.pyx", line 229, in numpy.random._common.validate_output_shape
+ValueError: Output size (2, 1) is not compatible with broadcast dimensions of inputs (2, 2).
+2023-02-20 15:50:16,173 - pyswarms.single.global_best - INFO - Optimize for 1000 iters with {'c1': 1.47, 'c2': 1.47, 'w': 0.7}
+2023-02-20 15:50:17,589 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 0.0, best pos: [-2.64460628e-11 -7.24701898e-10]
+2023-02-20 15:51:23,397 - pyswarms.single.global_best - INFO - Optimize for 1000 iters with {'c1': 1.47, 'c2': 1.47, 'w': 0.7}
+2023-02-20 15:51:24,828 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 2.929348245838838e-99, best pos: [ 4.67164044e-50 -2.73299434e-50]
+2023-02-20 15:51:40,892 - pyswarms.single.global_best - INFO - Optimize for 1000 iters with {'c1': 1.47, 'c2': 1.47, 'w': 0.7}
+2023-02-20 15:51:42,400 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 8.18358299363781e-19, best pos: [1. 1.]
+2023-02-20 15:51:50,960 - pyswarms.single.global_best - INFO - Optimize for 1000 iters with {'c1': 1.47, 'c2': 1.47, 'w': 0.7}
+2023-02-20 15:51:52,312 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 0.0, best pos: [1. 1.]
+2023-02-20 15:52:02,712 - pyswarms.backend.generators - ERROR - Bounds and/or init_pos should be of size (10,)
+Traceback (most recent call last):
+  File "/home/cytech/.pyenv/versions/3.10.0/lib/python3.10/site-packages/pyswarms/backend/generators.py", line 81, in generate_swarm
+    pos = center * np.random.uniform(
+  File "mtrand.pyx", line 1131, in numpy.random.mtrand.RandomState.uniform
+  File "_common.pyx", line 562, in numpy.random._common.cont
+  File "_common.pyx", line 479, in numpy.random._common.cont_broadcast_2
+  File "__init__.pxd", line 742, in numpy.PyArray_MultiIterNew3
+ValueError: shape mismatch: objects cannot be broadcast to a single shape
+2023-02-20 15:52:08,502 - pyswarms.backend.generators - ERROR - Bounds and/or init_pos should be of size (10,)
+Traceback (most recent call last):
+  File "/home/cytech/.pyenv/versions/3.10.0/lib/python3.10/site-packages/pyswarms/backend/generators.py", line 81, in generate_swarm
+    pos = center * np.random.uniform(
+  File "mtrand.pyx", line 1131, in numpy.random.mtrand.RandomState.uniform
+  File "_common.pyx", line 562, in numpy.random._common.cont
+  File "_common.pyx", line 479, in numpy.random._common.cont_broadcast_2
+  File "__init__.pxd", line 742, in numpy.PyArray_MultiIterNew3
+ValueError: shape mismatch: objects cannot be broadcast to a single shape
+2023-02-20 15:52:20,834 - pyswarms.backend.generators - ERROR - Bounds and/or init_pos should be of size (3,)
+Traceback (most recent call last):
+  File "/home/cytech/.pyenv/versions/3.10.0/lib/python3.10/site-packages/pyswarms/backend/generators.py", line 81, in generate_swarm
+    pos = center * np.random.uniform(
+  File "mtrand.pyx", line 1131, in numpy.random.mtrand.RandomState.uniform
+  File "_common.pyx", line 562, in numpy.random._common.cont
+  File "_common.pyx", line 479, in numpy.random._common.cont_broadcast_2
+  File "__init__.pxd", line 742, in numpy.PyArray_MultiIterNew3
+ValueError: shape mismatch: objects cannot be broadcast to a single shape
+2023-02-20 15:52:28,536 - pyswarms.single.global_best - INFO - Optimize for 1000 iters with {'c1': 1.47, 'c2': 1.47, 'w': 0.7}
+2023-02-20 15:52:29,936 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 0.9955405365446829, best pos: [0.98699654 0.97501552 0.97071846 0.95146602 0.90932259 0.83121438
+ 0.71031995 0.51526127 0.27248461 0.07223165]
+2023-02-20 15:52:52,807 - pyswarms.single.global_best - INFO - Optimize for 1000 iters with {'c1': 1.47, 'c2': 1.47, 'w': 0.7}
+2023-02-20 15:52:54,242 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 4.313703566225678, best pos: [-0.98891145  0.99027279  0.98343474  0.97720412  0.95575509  0.92412237
+  0.85736731  0.73313837  0.53378716  0.28449825]
+2023-02-20 15:54:52,911 - pyswarms.single.global_best - INFO - Optimize for 1000 iters with {'c1': 1.47, 'c2': 1.47, 'w': 0.7}
+2023-02-20 15:54:54,385 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 0.2904061280819499, best pos: [0.98196576 0.97848864 0.98232571 0.97651613 0.96660984 0.94753677
+ 0.90254337 0.81884353 0.67273068 0.44939831]

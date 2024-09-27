@@ -1,0 +1,13 @@
+dans tower hpp et cpp: 
+name 
+pushDisk
+popDisk
+
+dans disk hpp et cpp:
+diameter: int
+
+main.cpp : game solver
+
+ATTENTION regles: 
+droit de mettre un disque sur un autre si il est plus petit
+3 tours dispos: source, destination, auxiliaire

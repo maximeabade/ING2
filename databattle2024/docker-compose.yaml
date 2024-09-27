@@ -1,0 +1,37 @@
+version: "3"
+services:
+  api:
+    container_name: api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - ./api/:/app
+    restart: on-failure
+    environment:
+      DEBUG: 1
+    networks:
+      - app
+      
+  front:
+    container_name: front
+    restart: unless-stopped
+    depends_on:
+      - api
+    build:
+      context: ./streamlit-front
+      dockerfile: Dockerfile
+    ports:
+      - 80:8501
+    volumes:
+      - ./streamlit-front/:/app
+    environment:
+      API_URL: http://api:8000
+    networks:
+      - app
+
+networks:
+  app:
+    driver: bridge

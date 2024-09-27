@@ -1,0 +1,48 @@
+﻿
+ANSSI ← best bro <3
+
+Cyber-risks triangle : Conflictualité, Criminalité et Complexité
+
+- Stuxnet
+
+Top 5 cybersecurity & cybercrime predictions
+- Augmentation de la surface d’attaque
+- Plus grande complexité des attaques
+- Utilisation de l’IA et du big-data comme support des attaques
+- Risques accrus de dépendance numérique (paralysie des sytèmes)
+- Les risques de souveraineté liés au cloud
+
+Les cibles :
+- Le système d’information
+- Les données
+- L’image de la structure
+- L’argent de la structure
+
+4 grandes familles de risque:
+- Cybercriminalité
+- Espionnage
+- Atteinte à l'image
+- Sabotage
+
+
+OIV : Opérateur d'importance Vitale
+OSE : Opérateur de services essentiels
+
+
+Kill chain : méthode/processus/séquence de toute attaque cyber complexe
+
+    1 - Ciblage et reconnaissance
+    2 - Exploration (Recherche du maillon faible)
+    3 - Accès et élévation des droits
+    4 - Extraction des données - Modifications dans le Système d'information
+    5 - Attente - Déclenchement au top action
+    6 - Action - Asut
+    7 - Obfuscation - Nettoyage des preuves
+
+    
+    
+APT : advanced persistent threat
+ financé par des états ex Russie, israël
+ 
+ DICP : Disponibilité, intégrité,confidencialité,preuve/traçabilité
+    

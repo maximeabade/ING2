@@ -1,0 +1,2 @@
+loi de poisson : lambda = 1.5
+

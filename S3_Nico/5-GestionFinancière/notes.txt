@@ -1,0 +1,44 @@
+DAA (Dotation aux amortissements :
+
+ACHAT VEHICULE :
+50 000€ sur 5 ans
+Amortissement linéaire = 50 000€/5ans
+DAA annuelle = 10 000€
+Chaque année pendant 5 ans, le véhicule perdra 0 000€ de valeur.
+
+Une DAA ne se décaisse pas, c'est une perte de valeur comptable
+
+On retire du résultat net, toutes les charges qui ne dpnnent âs lieu à un décaissement, exemple : DAA
+
+
+EBE : excédent brut d'exploitation
+
+Capitaux propres représentent les dettes de l'entreprise vis à vis de ses actionnaires.
+
+
+FR : fonds de roulement
+BFR : besoin en fonds de roulement
+BRF = Actif courant - dettes court terme
+
+Un fond de roulement positif est préferable car le fond de roulement compare les fonds disponibles (apport des actionnaire, apport de la banque) aux investissement donc plus les fonds disponibles sont élévés plus l'entreprise pourra investir moins les fonds disponibles sont élevés plus l'entreprise est contrainte est contrainte de trouver d'autres sources de financement, notamment par ses ventes.
+
+BFR négatif est le mieux, cela signifie que l'entreprise dispose de fonds imédiat. En effet une dette fournisseur représente de l'argent momentanément disponible pour l'entreprise.
+
+
+
+CAPITALISATION BOURSIERE : valeur du capital apporté par le marché boursier
+CB = nb actions * cours de l'action
+
+ratio PER = CB / resultat >1 confiance | <1 méfiance dans l'entreprise
+
+
+420 000€ dans 1 an
+Coût achat 370 000€
+tr 5%    investissement boursier 12%
+
+
+VAN = 370 000 + 420 000/(1 + 0.05) = 30 000
+
+VAN = -370 000 + 420 000/(1 + 0.05)^2
+
+

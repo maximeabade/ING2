@@ -1,0 +1,6 @@
+Revoir les design patterns deux par deux => UML a faire + reimplementer le tout
+
+Bien noter les questions importantes
+
+Annales, voir les patterns qui reviennent le plus et les bosser a fond
+
